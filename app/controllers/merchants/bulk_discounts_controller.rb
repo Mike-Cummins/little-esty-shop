@@ -28,10 +28,23 @@ module Merchants
       redirect_to merchant_bulk_discounts_path(merchant.id)
     end
 
-    # private
+    def edit
+      @merchant = Merchant.find(params[:merchant_id])
+      @discount = BulkDiscount.find(params[:id])
+    end
+
+    def update
+      @merchant = Merchant.find(params[:merchant_id])
+      @discount = BulkDiscount.find(params[:id])
+      @discount.update(bulk_discount_params)
+      
+      redirect_to merchant_bulk_discount_path(@merchant, @discount)
+    end
+
+    private
     
-    # def bulk_discount_params
-    #   params.require(:bulk_discount).permit(:quantity_threshold, :percentage_discount)
-    # end
+    def bulk_discount_params
+      params.permit(:quantity_threshold, :percentage_discount)
+    end
   end
 end
