@@ -25,7 +25,7 @@ class Invoice < ApplicationRecord
     number_to_currency(self.items.where(merchant_id: merchant.id).sum('invoice_items.quantity * invoice_items.unit_price') / 100.0)
   end
 
-  def merchant_discounted_revenue(merchant)
+  def total_revenue_after_discount_by_merchant(merchant)
     case_statement = self.invoice_items.left_joins(item: :bulk_discounts).where('items.merchant_id = ?', merchant.id)
       .select('invoice_items.*, min(0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE 
         WHEN invoice_items.quantity >= bulk_discounts.quantity_threshold 

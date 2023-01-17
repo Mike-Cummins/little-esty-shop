@@ -34,7 +34,7 @@ RSpec.describe Invoice do
       invoice_1 = Invoice.find(1)
       discount = merchant_1.bulk_discounts.create!(percentage_discount: 10, quantity_threshold: 5)
 
-      expect(invoice_1.merchant_discounted_revenue(merchant_1)).to eq('$19,234.57')
+      expect(invoice_1.total_revenue_after_discount_by_merchant(merchant_1)).to eq('$19,234.57')
     end
   end
 end

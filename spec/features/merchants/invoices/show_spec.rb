@@ -65,10 +65,10 @@ RSpec.describe 'Merchants Invoice Show' do
   it 'Displays the total revenue after discounts' do
     merchant_1 = Merchant.find(1)
     invoice_1 = Invoice.find(1)
-    discount = merchant.bulk_discounts.create!(percentage_discount: 10, quantity_threshold: 5)
+    discount = merchant_1.bulk_discounts.create!(percentage_discount: 10, quantity_threshold: 5)
    
     visit merchant_invoice_path(merchant_1, invoice_1)
 
-    expect(page).to have_content("Total revenue after discounts: $19,234.57")
+    expect(page).to have_content("Total invoice revenue after discounts: $19,234.57")
   end
 end
