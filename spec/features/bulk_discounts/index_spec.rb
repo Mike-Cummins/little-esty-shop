@@ -16,20 +16,20 @@ RSpec.describe 'Bulk Discounts Index' do
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1.id))
 
       within "#discount_#{@discount_1.id}" do
-        expect(page).to have_content("30.0% off when you buy 15")
+        expect(page).to have_content("30% off when you buy 15")
       end
 
       within "#discount_#{@discount_2.id}" do
-        expect(page).to have_content("20.0% off when you buy 10")
+        expect(page).to have_content("20% off when you buy 10")
       end
 
-      expect(page).to_not have_content("10.0% off when you buy 5")
+      expect(page).to_not have_content("10% off when you buy 5")
     end
 
     it 'Index has a link to view each discounts show page' do
       visit merchant_bulk_discounts_path(@merchant_1.id)
 
-      click_on("30.0% off when you buy 15")
+      click_on("30% off when you buy 15")
 
       expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1, @discount_1))
     end
@@ -47,21 +47,21 @@ RSpec.describe 'Bulk Discounts Index' do
       click_on("Create Discount")
 
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1.id))
-      expect(page).to have_content("50.0% off when you buy 20")
+      expect(page).to have_content("50% off when you buy 20")
     end
 
     it 'Has a button to delete a discount' do
       visit merchant_bulk_discounts_path(@merchant_1.id)
 
-      expect(page).to have_content("20.0% off when you buy 10")
-      expect(page).to have_content("30.0% off when you buy 15")
+      expect(page).to have_content("20% off when you buy 10")
+      expect(page).to have_content("30% off when you buy 15")
 
       within "#discount_#{@discount_1.id}" do
         click_on("Delete Discount")
       end
 
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1.id))
-      expect(page).to_not have_content("30.0% off when you buy 15")
+      expect(page).to_not have_content("30% off when you buy 15")
     end
   end
 end
