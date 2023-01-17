@@ -8,7 +8,7 @@ RSpec.describe 'Bulk Discounts Edit' do
       
       visit merchant_bulk_discount_path(merchant_1, discount_1)
 
-      expect(page).to have_content("30.0% off when you buy 15")
+      expect(page).to have_content("30% off when you buy 15")
       expect(page).to have_link("Edit Discount")
       click_link("Edit Discount")
    
@@ -18,7 +18,7 @@ RSpec.describe 'Bulk Discounts Edit' do
       click_on("Update Discount")
 
       expect(current_path).to eq(merchant_bulk_discount_path(merchant_1, discount_1))
-      expect(page).to have_content("50.0% off when you buy 20")
+      expect(page).to have_content("50% off when you buy 20")
     end
   end 
 end
