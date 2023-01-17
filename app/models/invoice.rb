@@ -3,6 +3,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items, dependent: :destroy
   has_many :items, through: :invoice_items
   has_many :transactions, dependent: :destroy
+  has_many :bulk_discounts, through: :invoice_items
   enum status: { 'in progress' => 0, completed: 1, cancelled: 2 }
 
   def self.incomplete_invoices

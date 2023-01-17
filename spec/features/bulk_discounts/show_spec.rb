@@ -5,9 +5,9 @@ RSpec.describe "Bulk Discount Show" do
     before :each do
       @merchant_1 = Merchant.first
       @merchant_2 = Merchant.last
-      @discount_1 = @merchant_1.bulk_discounts.create!(percentage_discount: 0.30, quantity_threshold: 15)
-      @discount_2 = @merchant_1.bulk_discounts.create!(percentage_discount: 0.20, quantity_threshold: 10)
-      @discount_3 = @merchant_2.bulk_discounts.create!(percentage_discount: 0.10, quantity_threshold: 5)
+      @discount_1 = @merchant_1.bulk_discounts.create!(percentage_discount: 30, quantity_threshold: 15)
+      @discount_2 = @merchant_1.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)
+      @discount_3 = @merchant_2.bulk_discounts.create!(percentage_discount: 10, quantity_threshold: 5)
     end
 
     it 'Displays the discount percentage and quantity threshold' do
