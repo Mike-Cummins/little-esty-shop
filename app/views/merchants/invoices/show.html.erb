@@ -5,6 +5,7 @@ Status: <%= @invoice.status.capitalize %><br>
 Created on: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %><br>
 Total invoice revenue: <%= @invoice.total_invoice_revenue %><br>
 Total invoice revenue after discounts: <%= @invoice.total_revenue_after_discount_by_merchant(@merchant) %><br>
+  
 <h3>Customer:</h3>
  <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %><br>
 
@@ -26,8 +27,14 @@ Total invoice revenue after discounts: <%= @invoice.total_revenue_after_discount
           <% form.label :status %>
           <%= form.select :status, options_for_select(['Pending', 'Packaged', 'Shipped'], invoice_item.status.capitalize) %>
           <%= form.submit 'Update Item Status' %></td>
-
         <% end %>
+        <td>
+          <% if invoice_item.discounted? %>
+            <td><%= link_to "#{invoice_item.applied_discount.percentage_discount}% off.", merchant_bulk_discount_path(@merchant, invoice_item.applied_discount) %></td>
+          <% else %>
+            <td><%= "N/A" %></td>
+          <% end %>
+        </td>
       </tr>
     </div>
   <% end %>
