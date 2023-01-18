@@ -16,3 +16,7 @@
 </div>
 
 <%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant)%>
+<h3>Upcoming Holidays</h3>
+<p><%= @holidays.holiday_names.first %>:  <%= @holidays.holiday_dates.first %></p>
+<p><%= @holidays.holiday_names.second %>:  <%= @holidays.holiday_dates.second %></p>
+<p><%= @holidays.holiday_names.third %>:  <%= @holidays.holiday_dates.third %></p>

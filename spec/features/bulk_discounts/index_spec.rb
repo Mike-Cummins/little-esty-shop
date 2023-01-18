@@ -59,7 +59,7 @@ RSpec.describe 'Bulk Discounts Index' do
       within "#discount_#{@discount_1.id}" do
         click_on("Delete Discount")
       end
-
+save_and_open_page
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1.id))
       expect(page).to_not have_content("30% off when you buy 15")
     end
