@@ -9,4 +9,12 @@ class InvoiceItem < ApplicationRecord
   def unit_price_to_dollars
     number_to_currency(self.unit_price.to_f / 100)
   end
+
+  def discounted?
+    self.bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', self.quantity).present?
+  end
+
+  def applied_discount
+    self.bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', self.quantity).order('bulk_discounts.percentage_discount desc').first
+  end
 end

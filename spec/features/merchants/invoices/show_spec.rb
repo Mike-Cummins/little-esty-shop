@@ -71,4 +71,20 @@ RSpec.describe 'Merchants Invoice Show' do
 
     expect(page).to have_content("Total invoice revenue after discounts: $19,234.57")
   end
+
+  it 'Displays the discount applied as a link to its show page' do
+    merchant_1 = Merchant.find(1)
+    invoice_1 = Invoice.find(1)
+    discount = merchant_1.bulk_discounts.create!(percentage_discount: 10, quantity_threshold: 5)
+    invoice_item_1 = invoice_1.invoice_items.first
+
+    visit merchant_invoice_path(merchant_1, invoice_1)
+
+    within "#item_#{invoice_item_1.id}" do
+      expect(page).to have_content("10% off.")
+      click_link("10% off.")
+    end
+
+    expect(current_path).to eq(merchant_bulk_discount_path(merchant_1, discount))
+  end
 end
