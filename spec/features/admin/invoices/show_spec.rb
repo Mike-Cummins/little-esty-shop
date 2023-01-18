@@ -40,4 +40,10 @@ RSpec.describe 'Admin Invoice Show' do
       click_button 'Update Invoice Status'
     end
   end
+
+  it 'Displays the total revenue before and after discounts' do
+    visit admin_invoice_path(Invoice.first)
+save_and_open_page  
+    expect(page).to have_content("Invoice Discounted Total: $21,067.77")
+  end
 end

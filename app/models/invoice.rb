@@ -35,4 +35,15 @@ class Invoice < ApplicationRecord
     
     number_to_currency(Item.from(case_statement).sum('revenue'))
   end  
+
+  def total_invoice_revenue_after_discount
+    case_statement = self.invoice_items.left_joins(:bulk_discounts)
+      .select('invoice_items.*, min(0.01 * invoice_items.quantity * invoice_items.unit_price * (CASE 
+        WHEN invoice_items.quantity >= bulk_discounts.quantity_threshold 
+        THEN (1 - bulk_discounts.percentage_discount / 100.00) 
+        ELSE 1 
+        END)) as revenue').group(:id)
+    
+    number_to_currency(Item.from(case_statement).sum('revenue'))
+  end
 end
