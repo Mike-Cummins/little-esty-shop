@@ -10,9 +10,12 @@
     <%= form.submit 'Update Invoice Status' %>
   <% end %>
 </div>
-
-Invoice Created: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %><br>
+<br>
+Invoice Created: <%= @invoice.created_at.strftime('%A, %B %-d, %Y') %>
+<br>
 Invoice Total: <%= @invoice.total_invoice_revenue %>
+<br>
+Invoice Discounted Total: <%= @invoice.total_invoice_revenue_after_discount %>
 <h3>Customer:</h3>
 <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
 <br>
